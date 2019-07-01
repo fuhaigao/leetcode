@@ -8,6 +8,7 @@ HashSet<Character> hs = new HashSet();
 List<Integer> arr = new ArrayList<int>();
 ArrayList<ArrayList<Integer>> arr = new ArrayList<>() / ArrayList();
 Arrays.sort(arr, (a,b) -> a[0]-b[0])
+Collections.reverse(arr);
 
 arr.add()
 arr.remove(index);  //arr.remove(arr.size()-1) == pop_back
@@ -21,6 +22,7 @@ Almost always the first one is preferred over the second one. The first has the 
 string:
 charAt(index)
 str.length()
+str.isEmpty()
 
 StringBuilder sb = new StringBuilder();
 sb.append(val)  //val 可以是任何type
@@ -28,3 +30,9 @@ sb.append(val)  //val 可以是任何type
 obj.toString() / String.valueOf(obj) //唯一区别在：when obj == null, String.valueOf return "null"
 
 char to int: 'a' - '0' / Character.getNumericValue(c)
+
+Stack<TreeNode> stack = new Stack();
+stack.add();
+stack.pop();
+stack.peek();
+stack.empty();
