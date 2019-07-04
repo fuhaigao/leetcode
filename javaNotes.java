@@ -36,3 +36,10 @@ stack.add();
 stack.pop();
 stack.peek();
 stack.empty();
+
+
+char[] c = s.toCharArray();
+Character.isLetterOrDigit(c);
+Character.toLowerCase(c);
+
+Integer.MAX_VALUE / Integer.MIN_VALUE
