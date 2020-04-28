@@ -1,12 +1,14 @@
 class Solution:
-    def canConstruct(self, ransomNote: str, magazine: str) -> bool:
-        mapping = [0]*26
-        for c in magazine:
-            index = ord(c)-ord('a')
-            mapping[index] += 1
-        for c in ransomNote:
-            index = ord(c)-ord('a')
-            mapping[index] -= 1
-            if mapping[index] < 0:
-                return False
-        return True
+    def lexicalOrder(self, n: int) -> List[int]:
+        res = []
+        for i in range(1,10):
+            self.dfs(res, i, n)
+        return res
+    
+    def dfs(self, res, curr, n):
+        if curr > n:
+            return
+        res.append(curr)
+        for i in range(10):
+            self.dfs(res, curr*10+i, n)
+        return
