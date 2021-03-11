@@ -13,6 +13,7 @@ map = dict()
 for key in map.keys():
 val = map[key] or map.get(key)
 del map[key]            # delete the entry with key
+dict[c] = dict.get(c, 0) + 1
 
 # for range
 for i in range(n)
@@ -37,3 +38,6 @@ heapq.heappop(heap)                 # pop and return the smallest item from heap
 heapq.heapify(arr)                  # Transform list arr into a min heap
 heapq.pushpop(heap, iteam)
 heapq.heapreplace(heap, iteam)      # poppush
+
+float('-inf')
+-sys.maxsize
