@@ -24,8 +24,12 @@ for i in range(n-1, -1, -1)
 arr = [0]*n or arr = [0 for i in range(n)]
 
 # sort
-sorted()                # apply to any iterable item
+sorted()                # apply to any iterable item !!! will return a list of sorted elements
 list.sort()             # only list can use .sort(), good to use for 2d array: sort based on arr[0]
+arr.sort(key = lambda x: (x[0], -x[1]))  # first element 从小到大， second element 从大到小
+
+# get a sorted string: sort string to charaters -> then join
+s = "".join(sorted(s))
 
 # list
 arr[::-1]                               # reverse list
@@ -39,5 +43,18 @@ heapq.heapify(arr)                  # Transform list arr into a min heap
 heapq.pushpop(heap, iteam)
 heapq.heapreplace(heap, iteam)      # poppush
 
+# For max heap: everything with "-" sign
+heapq.heappush(heap, -value)
+-heapq.heappop(heap)
+
 float('-inf')
 -sys.maxsize
+
+# string to list
+slist = list(s)
+
+# list to string
+''.join(slist)
+
+# 判断 char isDigit
+c.isdigit()
