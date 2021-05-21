@@ -1,30 +1,24 @@
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
-        dict = {}
-        count = len(t)
+        dict, index, end, count, minLength = {}, 0, 0, len(t), sys.maxsize
+        minStart = 0
         for c in t:
-            dict[c] = dict.get(c, 0) + 1
-        begin, end, head = 0, 0, 0
-        min_length = float('inf')
+            dict[c] = dict.get(c, 0)+1
         
         while end < len(s):
-            cEnd = s[end]
-            dict[cEnd] = dict.get(cEnd, 0)-1
-            if dict[cEnd] >= 0:
+            currChar = s[end]
+            dict[currChar] = dict.get(currChar, 0)-1
+            if dict[currChar] >= 0:
                 count -= 1
             end += 1
-            
+
             while count == 0:
-                if end-begin < min_length:
-                    min_length = end-begin
-                    head = begin
-                cBegin = s[begin]
-                if dict[cBegin] == 0:
+                if end-index < minLength:
+                    minLength = end-index
+                    minStart = index
+                dict[s[index]] += 1
+                if dict[s[index]] > 0:
                     count += 1
-                dict[cBegin] += 1
-                begin += 1
-                
-        if min_length == float('inf'):
-            return ""
-        else:
-            return s[head: head+min_length]
+                index += 1
+        
+        return s[minStart:minStart+minLength] if minLength != sys.maxsize else ""

@@ -1,0 +1,94 @@
+======================== Q1 =============
+#coding=utf-8
+import sys 
+#str = input()
+#print(str)
+
+class TreeNode:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+        
+     
+        
+def leftTree(head):
+    queue = [head]
+    res = []
+    while queue:
+        level_num = len(queue)
+        for i in range(level_num):
+            node = queue.pop(0)
+            if node.left:
+                queue.append(node.left)
+            if node.right:
+                queue.append(node.right)
+            if i == 0:
+                res.append(node.value)
+    return res
+
+root = TreeNode(1)
+root.left = TreeNode(2)
+root.right = TreeNode(3)
+left = root.left
+left.left = TreeNode(4)
+left.right = TreeNode(5)
+right = root.right
+right.left = TreeNode(6)
+right.right = TreeNode(7)
+right.right.right = TreeNode(8)
+res = leftTree(root)
+print(res)
+
+========================= Q2 ============================
+
+import sys 
+#str = input()
+#print(str)
+
+class ListNode:
+    def __init__(self, value):
+        self.val = value
+        self.next = None
+
+def merge(left, right):
+    dummy = ListNode(0)
+    res = dummy
+    while left and right:
+        if left.val <= right.val:
+            res.next = left
+            left = left.next
+        elif right.val < left.val:
+            res.next = right
+            right = right.next
+        res = res.next
+    if left:
+        res.next = left
+    if right:
+        res.next = right
+    return dummy.next
+
+def mergeSort(head):
+    if not head.next or not head:
+        return head
+    prev, slow, fast = head, head, head
+    while fast and fast.next:
+        prev = slow
+        slow = slow.next
+        fast = fast.next.next
+    prev.next = None
+    
+    left = mergeSort(head)
+    right = mergeSort(slow)
+    
+    res = merge(left, right)
+    return res
+    
+head = ListNode(9)
+head.next = ListNode(8)
+head.next.next = ListNode(7)
+head.next.next.next = ListNode(6)
+res = mergeSort(head)
+while (res):
+    print(res.val)
+    res = res.next

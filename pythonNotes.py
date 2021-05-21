@@ -14,6 +14,7 @@ for key in map.keys():
 val = map[key] or map.get(key)
 del map[key]            # delete the entry with key
 dict[c] = dict.get(c, 0) + 1
+for key,value in dict.items():
 
 # for range
 for i in range(n)
@@ -58,3 +59,15 @@ slist = list(s)
 
 # 判断 char isDigit
 c.isdigit()
+
+versions1 = [int(v) for v in version1.split(".")]
+
+Note:
+In binary search
+while start < end:
+    sth = mid+1
+    sth_else = mid 
+OR 
+while start <= end:
+    sth = mid+1
+    sth_else = mid-1
