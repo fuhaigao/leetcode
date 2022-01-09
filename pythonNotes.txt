@@ -60,6 +60,10 @@ slist = list(s)
 # 判断 char isDigit
 c.isdigit()
 
+collections.Counter()
+# Use defaultdict to give a default value
+collections.defaultdict(set)
+
 versions1 = [int(v) for v in version1.split(".")]
 
 Note:
@@ -71,3 +75,8 @@ OR
 while start <= end:
     sth = mid+1
     sth_else = mid-1
+
+Global variables can be defined under class solution without __init__(), change global variables with self.global_var (Ex. 99)
+
+Greedy Problem (1024, 45, 1326):
+First we need ensure that the array has been sorted by start time. Then say in each step, we have a range [left, right], which means we can only visit the elements within the range in this step. We keep checking the elements until we are at the rightmost postion in [left, right] to update "farthestMove" , which means the farthest we can reach in next step.
