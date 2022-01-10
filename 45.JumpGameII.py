@@ -1,11 +1,14 @@
 class Solution:
+    # Greedy
     def jump(self, nums: List[int]) -> int:
-        end = len(nums)-1
-        steps = 0
-        while end > 0:
-            for i in range(end):
-                if nums[i] >= (end-i):
-                    end = i
-                    steps += 1
-                    break
-        return steps
+        end, farthestReach, count = 0, 0, 0
+        curr = 0
+        while end < len(nums)-1:
+            count += 1
+            while curr <= end and curr < len(nums):
+                farthestReach = max(farthestReach, curr+nums[curr])
+                curr += 1
+            if end == farthestReach:
+                return -1
+            end = farthestReach
+        return count

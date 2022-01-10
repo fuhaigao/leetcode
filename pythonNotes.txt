@@ -80,3 +80,4 @@ Global variables can be defined under class solution without __init__(), change 
 
 Greedy Problem (1024, 45, 1326):
 First we need ensure that the array has been sorted by start time. Then say in each step, we have a range [left, right], which means we can only visit the elements within the range in this step. We keep checking the elements until we are at the rightmost postion in [left, right] to update "farthestMove" , which means the farthest we can reach in next step.
+必要的四个var: end(current index), curr(index has been iterated), farthestMove(目前可以到的最远距离)， count(答案)
