@@ -5,15 +5,20 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def postorderTraversal(self, root: TreeNode) -> List[int]:
-        stack, res = [], []
-        while root or stack:
-            if root:
-                stack.append(root)
-                res.insert(0,root.val)
-                root = root.right
-            else:
-                root = stack.pop()
-                root = root.left
+    '''
+        区别于preorder，只需要 append替换成insert(0)
+        注意：还要改成 先push left 再push right，这样pop的结果就是先右后左，配合insert(0)顺序才对
+        *也可以不用insert(0, value), 最后对res进行reverse
+    '''
+    def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        if not root: 
+            return []
+        stack, res = [root], []
+        while stack:
+            root = stack.pop()
+            res.insert(0, root.val)
+            if root.left:
+                stack.append(root.left)
+            if root.right:
+                stack.append(root.right)
         return res
-        

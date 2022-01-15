@@ -77,7 +77,24 @@ while start <= end:
     sth_else = mid-1
 
 Global variables can be defined under class solution without __init__(), change global variables with self.global_var (Ex. 99)
+But dict() or list cannot be initialized global without __init__()
 
 Greedy Problem (1024, 45, 1326):
 First we need ensure that the array has been sorted by start time. Then say in each step, we have a range [left, right], which means we can only visit the elements within the range in this step. We keep checking the elements until we are at the rightmost postion in [left, right] to update "farthestMove" , which means the farthest we can reach in next step.
 必要的四个var: end(current index), curr(index has been iterated), farthestMove(目前可以到的最远距离)， count(答案)
+
+Sliding Window (209, 904, 76)
+
+Set(Hashset) vs List
+Sets are significantly faster when it comes to determining if an object is present in the set (as in x in s), but are slower than lists when it comes to iterating over their contents.
+
+遇到更新数字中的digit时，用 list(str(num)) 方便直接对digit进行更改
+
+Tree
+- 判断是否需要 helper func？ 不需要helper func 需满足3条件：
+    1. 需要传递的参数 和 solution params一致
+    2. 不需要 global var keep track 回溯问题
+    简单来讲，如果 solution function 可以直接 return self.helper(args...) 则可以不需要helper func
+- 遇到需要比较numbers in BST时，通常用 inorder traversal 把values存到list中 方便比较（Ex. 98, 501, 530）
+- 重点: 如何利用recursion 修改 BST (modify the tree without knowing the parent of this node at current round) 
+  **有返回值的话，可以利用返回值完成新加入的节点与其父节点的赋值操作。 Ex.450, 701

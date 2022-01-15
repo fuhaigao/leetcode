@@ -5,16 +5,17 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def isValidBST(self, root: TreeNode) -> bool:
-        stack = []
-        pre = None
-        while root or stack:
-            while root:
-                stack.append(root)
-                root = root.left
-            root = stack.pop()
-            if pre and pre.val >= root.val:
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        nums = list()
+        self.traversal(root, nums)
+        for i in range(1, len(nums)):
+            if nums[i] <= nums[i-1]:
                 return False
-            pre = root
-            root = root.right
         return True
+    
+    def traversal(self, root, nums):
+        if not root:
+            return
+        self.traversal(root.left, nums)
+        nums.append(root.val)
+        self.traversal(root.right, nums)

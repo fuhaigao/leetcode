@@ -1,23 +1,15 @@
 class Solution:
+    '''
+    greedy
+    局部最优：删除单调坡度上的节点（不包括单调坡度两端的节点），那么这个坡度就可以有两个局部峰值。
+    整体最优：整个序列有最多的局部峰值，从而达到最长摆动序列。
+    '''
     def wiggleMaxLength(self, nums: List[int]) -> int:
-        # stores the length of chosen nums at index i 
-        if len(nums) == 0:
-            return 0
-        positive = [0] * len(nums)
-        negative = [0] * len(nums)
-        positive[0] = 1
-        negative[0] = 1
+        res, preC = 1, 0
         for i in range(1, len(nums)):
-            # difference > 0 condition: 
-            if nums[i] > nums[i-1]:
-                positive[i] = negative[i-1] + 1
-                negative[i] = negative[i-1]
-            # difference < 0 condition: 
-            elif nums[i] < nums[i-1]:
-                negative[i] = positive[i-1] + 1
-                positive[i] = positive[i-1]
-            #difference == 0 condition:
-            else:
-                negative[i] = negative[i-1]
-                positive[i] = positive[i-1]
-        return max(positive[-1], negative[-1])
+            currC = nums[i] - nums[i-1]
+            if currC * preC <= 0 and currC != 0:
+                res += 1
+                preC = currC            
+        return res
+            
