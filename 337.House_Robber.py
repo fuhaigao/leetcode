@@ -1,20 +1,19 @@
 # Definition for a binary tree node.
 # class TreeNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
-
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
 class Solution:
-    def rob(self, root: TreeNode) -> int:
-        res = self.rob_helper(root)
-        return max(res[0], res[1])
-    def rob_helper(self, root):
+    def rob(self, root: Optional[TreeNode]) -> int:
+        result = self.traverse(root)
+        return max(result)
+    
+    def traverse(self, root):
         if not root:
-            return [0,0]
-        left = self.rob_helper(root.left)
-        right = self.rob_helper(root.right)
-        res = [0,0]
-        res[0] = max(left[0], left[1]) + max(right[0], right[1])
-        res[1] = root.val + left[0] + right[0]
-        return res
+            return (0, 0)
+        left = self.traverse(root.left)
+        right = self.traverse(root.right)
+        selectCurrentNode = root.val + left[0] + right[0]
+        unselectCurrentNode = max(left) + max(right)
+        return (unselectCurrentNode, selectCurrentNode)

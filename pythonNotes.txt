@@ -98,3 +98,17 @@ Tree
 - 遇到需要比较numbers in BST时，通常用 inorder traversal 把values存到list中 方便比较（Ex. 98, 501, 530）
 - 重点: 如何利用recursion 修改 BST (modify the tree without knowing the parent of this node at current round) 
   **有返回值的话，可以利用返回值完成新加入的节点与其父节点的赋值操作。 Ex.450, 701
+
+DP 问题步骤
+1. 确定dp数组（dp table）以及下标的含义
+2. 确定递推公式
+3. dp数组如何初始化
+4. 确定遍历顺序
+*5. 举例推导dp数组
+
+DP 01背包
+- 用一维滚动数组作为dp时，遍历背包要倒序 - 防止单个物品被放多次
+- 求背包中可以装的最大值时： dp[j] = max(dp[j], dp[j-nums[i]]+nums[i])
+- 求装满背包有几种方法时： dp[j] += dp[j - nums[i]];
+- 如果求组合数就是外层for循环遍历物品，内层for遍历背包;
+  如果求排列数就是外层for遍历背包，内层for循环遍历物品。
