@@ -28,6 +28,7 @@ arr = [0]*n or arr = [0 for i in range(n)]
 sorted()                # apply to any iterable item !!! will return a list of sorted elements
 list.sort()             # only list can use .sort(), good to use for 2d array: sort based on arr[0]
 arr.sort(key = lambda x: (x[0], -x[1]))  # first element 从小到大， second element 从大到小
+关于 sort(key = func()), 看937
 
 # get a sorted string: sort string to charaters -> then join
 s = "".join(sorted(s))

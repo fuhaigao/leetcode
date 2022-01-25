@@ -1,4 +1,9 @@
 class Solution:
+    '''
+    单调栈
+    tricky part: stack initialize with -1, and append heights with 0. 
+    This way, stack won't be empty for getting width, and heights[-1] will be also considered
+    '''
     def largestRectangleArea(self, heights: List[int]) -> int:
         res = 0
         heights.append(0)
