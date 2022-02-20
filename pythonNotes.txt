@@ -113,3 +113,19 @@ DP 01背包
 - 求装满背包有几种方法时： dp[j] += dp[j - nums[i]];
 - 如果求组合数就是外层for循环遍历物品，内层for遍历背包;
   如果求排列数就是外层for遍历背包，内层for循环遍历物品。
+
+单调栈 (monotonic stack)
+496, 503, 739, 84, 901, 907, 856
+
+Sliding Window
+209, 904, 76, *(992, 1248, 1358, 930), 1234, 1004, 992, 862
+
+更新result通常是两个approach 2选1:
+1. inner while determines if the condition is reached, then update result in inner while loop
+2. inner while check if it past the condition, update start pointer to the uptimized position, then update result after inner while loop
+
+带*的 Sliding Window 题：
+For those question, an `atmostK` helper function is required. So, result(k) = atMostk(k) - atMostk(k-1) 
+当 sliding window 题目要求找出 number of subarrys that meet some target, 就需要用到这个方法。
+
+转换 n进制的方法 504
