@@ -4,7 +4,7 @@ arr.insert(index, x)
 arr.pop()               # pop from end
 arr.pop(0)              # pop from front
 
-while contion:          # No () 
+while contion:          # No ()
 
 if not tmp              # check null
 
@@ -14,11 +14,11 @@ for key in map.keys():
 val = map[key] or map.get(key)
 del map[key]            # delete the entry with key
 dict[c] = dict.get(c, 0) + 1
-for key,value in dict.items():
+for key, value in dict.items():
 
-# for range
+    # for range
 for i in range(n)
-for i in range(2,8)
+for i in range(2, 8)
 for i in range(n-1, -1, -1)
 
 # init array with values:
@@ -26,9 +26,11 @@ arr = [0]*n or arr = [0 for i in range(n)]
 
 # sort
 sorted()                # apply to any iterable item !!! will return a list of sorted elements
-list.sort()             # only list can use .sort(), good to use for 2d array: sort based on arr[0]
-arr.sort(key = lambda x: (x[0], -x[1]))  # first element 从小到大， second element 从大到小
-关于 sort(key = func()), 看937
+# only list can use .sort(), good to use for 2d array: sort based on arr[0]
+list.sort()
+# first element 从小到大， second element 从大到小
+arr.sort(key=lambda x: (x[0], -x[1]))
+关于 sort(key=func()), 看937
 
 # get a sorted string: sort string to charaters -> then join
 s = "".join(sorted(s))
@@ -40,7 +42,8 @@ arr[-1] == arr[len(arr)-1]              # last element of list
 # min heap / priority queue
 heap = []
 heapq.heappush(heap, item)          # push item into heap
-heapq.heappop(heap)                 # pop and return the smallest item from heap
+# pop and return the smallest item from heap
+heapq.heappop(heap)
 heapq.heapify(arr)                  # Transform list arr into a min heap
 heapq.pushpop(heap, iteam)
 heapq.heapreplace(heap, iteam)      # poppush
@@ -71,34 +74,35 @@ Note:
 In binary search
 while start < end:
     sth = mid+1
-    sth_else = mid 
-OR 
+    sth_else = mid
+OR
 while start <= end:
     sth = mid+1
     sth_else = mid-1
 
-Global variables can be defined under class solution without __init__(), change global variables with self.global_var (Ex. 99)
+Global variables can be defined under class solution without __init__(), change global variables with self.global_var(Ex. 99)
 But dict() or list cannot be initialized global without __init__()
 
-Greedy Problem (1024, 45, 1326):
-First we need ensure that the array has been sorted by start time. Then say in each step, we have a range [left, right], which means we can only visit the elements within the range in this step. We keep checking the elements until we are at the rightmost postion in [left, right] to update "farthestMove" , which means the farthest we can reach in next step.
+Greedy Problem(1024, 45, 1326):
+First we need ensure that the array has been sorted by start time. Then say in each step, we have a range[left, right], which means we can only visit the elements within the range in this step.
+We keep checking the elements until we are at the rightmost postion in [left, right] to update "farthestMove", which means the farthest we can reach in next step.
 必要的四个var: end(current index), curr(index has been iterated), farthestMove(目前可以到的最远距离)， count(答案)
 
-Sliding Window (209, 904, 76)
+Sliding Window(209, 904, 76)
 
 Set(Hashset) vs List
-Sets are significantly faster when it comes to determining if an object is present in the set (as in x in s), but are slower than lists when it comes to iterating over their contents.
+Sets are significantly faster when it comes to determining if an object is present in the set(as in x in s), but are slower than lists when it comes to iterating over their contents.
 
 遇到更新数字中的digit时，用 list(str(num)) 方便直接对digit进行更改
 
 Tree
 - 判断是否需要 helper func？ 不需要helper func 需满足3条件：
-    1. 需要传递的参数 和 solution params一致
-    2. 不需要 global var keep track 回溯问题
-    简单来讲，如果 solution function 可以直接 return self.helper(args...) 则可以不需要helper func
+1. 需要传递的参数 和 solution params一致
+2. 不需要 global var keep track 回溯问题
+简单来讲，如果 solution function 可以直接 return self.helper(args...) 则可以不需要helper func
 - 遇到需要比较numbers in BST时，通常用 inorder traversal 把values存到list中 方便比较（Ex. 98, 501, 530）
-- 重点: 如何利用recursion 修改 BST (modify the tree without knowing the parent of this node at current round) 
-  **有返回值的话，可以利用返回值完成新加入的节点与其父节点的赋值操作。 Ex.450, 701
+- 重点: 如何利用recursion 修改 BST(modify the tree without knowing the parent of this node at current round)
+**有返回值的话，可以利用返回值完成新加入的节点与其父节点的赋值操作。 Ex.450, 701
 
 DP 问题步骤
 1. 确定dp数组（dp table）以及下标的含义
@@ -110,11 +114,11 @@ DP 问题步骤
 DP 01背包
 - 用一维滚动数组作为dp时，遍历背包要倒序 - 防止单个物品被放多次
 - 求背包中可以装的最大值时： dp[j] = max(dp[j], dp[j-nums[i]]+nums[i])
-- 求装满背包有几种方法时： dp[j] += dp[j - nums[i]];
-- 如果求组合数就是外层for循环遍历物品，内层for遍历背包;
-  如果求排列数就是外层for遍历背包，内层for循环遍历物品。
+- 求装满背包有几种方法时： dp[j] += dp[j - nums[i]]
+- 如果求组合数就是外层for循环遍历物品，内层for遍历背包
+如果求排列数就是外层for遍历背包，内层for循环遍历物品。
 
-单调栈 (monotonic stack)
+单调栈(monotonic stack)
 496, 503, 739, 84, 901, 907, 856
 
 Sliding Window
@@ -125,7 +129,7 @@ Sliding Window
 2. inner while check if it past the condition, update start pointer to the uptimized position, then update result after inner while loop
 
 带*的 Sliding Window 题：
-For those question, an `atmostK` helper function is required. So, result(k) = atMostk(k) - atMostk(k-1) 
+For those question, an `atmostK` helper function is required. So, result(k) = atMostk(k) - atMostk(k-1)
 当 sliding window 题目要求找出 number of subarrys that meet some target, 就需要用到这个方法。
 
 转换 n进制的方法 504
