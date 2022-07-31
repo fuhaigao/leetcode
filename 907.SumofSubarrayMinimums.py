@@ -1,36 +1,32 @@
 class Solution:
     '''
-    单调栈
-    Tricky part:
+    https://www.youtube.com/watch?v=pS5PaqXa78k
+    文字解释不清楚，increasing monolithic stack 是重点
+    How to use increasing monolithic stack (单调栈) optimize to O(n)
+    1. To solve the problem in O(n), we need to know how many subarray uses current value (arr[i]) as minimum
+    2. a. 4,*3,2,1 -> 1 subarray = [3,2,1]
+       b. 1,2,*3,4 -> 2 subarrays = [1,2,3], [2,3]
+       c. 0,2,*1,4,5,0 -> 6 subarrays = [2,1], [2,1,4], [2,1,4,5], [1], [1,4], [1,4,5]
+       therefore, # of subarrays use arr[i] = left * right
+    3. we can use increasing monolithic stack to calculate left and right
     
-    1. why result = result + (left[i]*right[i]*arr[i])
-    e.g. 3,1,2,4 divider can be used to show different subarray:
-    3|1|24, 3|12|4, 3|124|, |31|24, |312|4, |3124|
-    There are 6 subarrays(# of greater values on the left of 1 * # of greater values on the right of 1) that have "1" as minimum value
-    
-    2. 用单调栈构建 left right
     
     '''
     def sumSubarrayMins(self, arr: List[int]) -> int:
-        left, right = [0]*len(arr), [0]*len(arr)
-        stackLeft, stackRight = [], []
+        stack, res = [], 0
         for i in range(len(arr)):
-            count = 1
-            while stackLeft and stackLeft[-1][0] > arr[i]:
-                count += stackLeft.pop()[1]
-            left[i] = count
-            stackLeft.append((arr[i], count))
+            curr = arr[i]
+            while stack and curr < arr[stack[-1]]:
+                right = stack.pop()
+                left = stack[-1] if stack else -1
+                res += (right-left)*(i-right)*arr[right]
+            stack.append(i)
         
-        for i in range(len(arr)-1, -1, -1):
-            count = 1
-            while stackRight and stackRight[-1][0] >= arr[i]:
-                count += stackRight.pop()[1]
-            right[i] = count
-            stackRight.append((arr[i], count))
+        while stack:
+            right = stack.pop()
+            left = stack[-1] if stack else -1
+            res += (right-left)*(len(arr)-right)*arr[right]
         
-        result, mod = 0, 10**9+7
-        for i in range(len(arr)):
-            result = (result + (arr[i]*left[i]*right[i]))%mod
-        return result
-    
-    
+        return res % (10**9 + 7)
+                
+            

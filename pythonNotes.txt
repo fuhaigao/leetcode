@@ -23,6 +23,10 @@ for i in range(n-1, -1, -1)
 
 # init array with values:
 arr = [0]*n or arr = [0 for i in range(n)]
+arr = [(x, y) for x in range(rows) for y in range(cols)] #init array of tuples
+
+Important note:
+arr = [collections.defaultdict]*n will create a list of dicts pointing to same memory space, meaning that modify one dict will affect other dicts in the list.
 
 # sort
 sorted()                # apply to any iterable item !!! will return a list of sorted elements
@@ -64,7 +68,12 @@ slist = list(s)
 # 判断 char isDigit
 c.isdigit()
 
-collections.Counter()
+# counter example: 1002
+cnt = collections.Counter(str)
+cnt[dneKey] == 0
+cnt[existKey] == count
+cnt.elements()
+
 # Use defaultdict to give a default value
 collections.defaultdict(set)
 
