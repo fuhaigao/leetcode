@@ -142,3 +142,7 @@ For those question, an `atmostK` helper function is required. So, result(k) = at
 当 sliding window 题目要求找出 number of subarrys that meet some target, 就需要用到这个方法。
 
 转换 n进制的方法 504
+
+Aggragate subarrys
+O(N)解决问题，consider how each element will affect the final result during iteration. (Usually use diactionary or monotonic stack)
+2262, 828, 897, 2104 1498

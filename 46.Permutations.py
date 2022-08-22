@@ -1,16 +1,12 @@
 class Solution:
-    def permute(self, nums: List[int]) -> List[List[int]]:
+    def permute(self, nums):
         res = []
-        self.helper(nums, [], res)
+        self.dfs(nums, [], res)
         return res
-    
-    def helper(self, nums, curr, res):
-        if len(curr) == len(nums):
-            res.append(curr)
-            return
-        for num in nums:
-            if num in curr:
-                continue
-            else:
-                self.helper(nums, curr+[num], res)
-        return
+        
+    def dfs(self, nums, path, res):
+        if not nums:
+            res.append(path)
+            # return # backtracking
+        for i in xrange(len(nums)):
+            self.dfs(nums[:i]+nums[i+1:], path+[nums[i]], res)
