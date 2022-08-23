@@ -1,89 +1,71 @@
 class LRUCache {
-    Map<Integer, DListNode> cache;
+
     int capacity;
-    DListNode head = null;
-    DListNode tail = null;
+    Node head;
+    Node tail;
+    Map<Integer, Node> hm;
+    
     public LRUCache(int capacity) {
-        cache = new HashMap<Integer, DListNode>();
         this.capacity = capacity;
+        this.hm = new HashMap<>();
+        this.head = new Node(0, 0);
+        this.tail = new Node(0, 0);
+        this.head.next = this.tail;
+        this.tail.prev = this.head;
     }
     
     public int get(int key) {
-        if (this.cache.containsKey(key)){
-            DListNode target = cache.get(key);
-            int value = target.val;
-            target.update();
-            return value;
+        if (hm.containsKey(key)) {
+            Node curr = hm.get(key);
+            remove(curr);
+            insert(curr);
+            return curr.value;
         }
         return -1;
     }
     
     public void put(int key, int value) {
-        if (cache.containsKey(key)) {
-            DListNode target = cache.get(key);
-            target.val = value;
-            target.update();
+        if (hm.containsKey(key)) {
+            remove(hm.get(key));
         }
-        else {
-            if (cache.size() == capacity){
-                cache.remove(head.key);
-                head.pop();
-            }
-            DListNode newNode = new DListNode(key, value);
-            newNode.append();
-            cache.put(key, newNode);
+        Node newNode = new Node(key, value);
+        hm.put(key, newNode);
+        insert(newNode);
+        if (hm.size() > this.capacity) {
+            Node lastNode = this.head.next;
+            remove(lastNode);
+            hm.remove(lastNode.key);
         }
     }
-    class DListNode {
-        int val;
-        int key;
-        DListNode next = null;
-        DListNode prev = null;
-        
-        public DListNode(int key, int val){
-            this.key = key;
-            this.val = val;
-        }
-        
-        private void append(){
-            // inseting the first node
-            if (tail == null){
-                tail = this;
-                head = this;
-            }
-            // appned as tail and update tail reference.
-            else {
-                this.next = null;
-                tail.next = this;
-                this.prev = tail;
-                tail = tail.next;
-            }
-        }
-        private void update() {
-            // no need to update if accessing the most revently used value.
-            if (this == tail) return;
-            else {
-                if (this == head)
-                    head = head.next;
-                else
-                    this.prev.next = this.next;
-                this.next.prev = this.prev;
-                this.append();
-            }
-        }
-        private void pop() {
-            // if 'this' is the only node, set both head and tail to null.
-            if (tail == this) {
-                head = null;
-                tail = null;
-            }
-            else {
-                head = this.next;
-                this.next.prev = null;
-            }
-        }
+    
+    public void remove(Node node) {
+        node.prev.next = node.next;
+        node.next.prev = node.prev;
+    }
+    
+    public void insert(Node node) {
+        Node lastNode = this.tail.prev;
+        lastNode.next = node;
+        node.prev = lastNode;
+        node.next = this.tail;
+        this.tail.prev = node;
+    }
+    
+}
+
+class Node {
+    int key;
+    int value;
+    Node prev;
+    Node next;
+
+    protected Node(int key, int value) {
+        this.key = key;
+        this.value = value;
     }
 }
+
+
 
 /**
  * Your LRUCache object will be instantiated and called as such:
