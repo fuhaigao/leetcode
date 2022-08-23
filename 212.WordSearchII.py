@@ -28,43 +28,55 @@
 # Use Trie Node to imporve performance
 class Solution:
     def __init__(self):
-        self.result = []
+        self.res = list()
+    
     def findWords(self, board: List[List[str]], words: List[str]) -> List[str]:
-        # init Trie
         root = TrieNode()
         for word in words:
-            node = root
-            for c in word:
-                if c not in node.next:
-                    node.next[c] = TrieNode()
-                node = node.next[c]
-            node.isWord = word
+            curr = root
+            for letter in word:
+                curr = curr.children[letter]
+            curr.word = word
         
         for i in range(len(board)):
             for j in range(len(board[0])):
-                self.dfs(board, root, i, j)
-        return self.result
-        
-    def dfs(self, board, root, i, j):
-        key = board[i][j]
-        node = root.next.get(key)
+                self.dfs(root, board, i, j)
+        return self.res
+    
+    # prefer this dfs, since it is more intuitive, but a bit slower (will get TLE but nothing wrong with structure)
+    # add the following trie.num_of_words = len(words), and decrement this by 1 every time you add a word to solution and at the beginning of the dfs return if num_of_words == 0 
+    def dfs(self, node, board, i, j):
+        if node.word != "" and node.word not in self.res:
+            self.res.append(node.word)
+        if i<0 or i>=len(board) or j<0 or j>=len(board[0]):
+            return
+        val = board[i][j]
+        node = node.children.get(val)
         if node:
-            if node.isWord != "" and node.isWord not in self.result:
-                self.result.append(node.isWord)
+            for direction in [[1,0], [-1,0], [0,1], [0,-1]]:
+                board[i][j] = "."
+                self.dfs(node, board, i+direction[0], j+direction[1])
+                board[i][j] = val
+    
+#     def dfs(self, root, board, i, j):
+#         key = board[i][j]
+#         node = root.children.get(key)
+#         if node:
+#             if node.word != "" and node.word not in self.res:
+#                 self.res.append(node.word)
         
-            board[i][j] = '.'
-            if i>0: 
-                self.dfs(board, node, i-1, j)
-            if i<len(board)-1: 
-                self.dfs(board, node, i+1, j)
-            if j>0: 
-                self.dfs(board, node, i, j-1)
-            if j<len(board[0])-1:   
-                self.dfs(board, node, i, j+1)
-            board[i][j] = key
-                
-
+#             board[i][j] = '.'
+#             if i>0: 
+#                 self.dfs(node, board, i-1, j)
+#             if i<len(board)-1: 
+#                 self.dfs(node, board, i+1, j)
+#             if j>0: 
+#                 self.dfs(node, board, i, j-1)
+#             if j<len(board[0])-1:   
+#                 self.dfs(node, board, i, j+1)
+#             board[i][j] = key
+            
 class TrieNode:
     def __init__(self):
-        self.next = dict()
-        self.isWord = ""
+        self.children = collections.defaultdict(TrieNode)
+        self.word = ""

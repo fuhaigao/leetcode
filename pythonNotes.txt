@@ -97,8 +97,6 @@ First we need ensure that the array has been sorted by start time. Then say in e
 We keep checking the elements until we are at the rightmost postion in [left, right] to update "farthestMove", which means the farthest we can reach in next step.
 必要的四个var: end(current index), curr(index has been iterated), farthestMove(目前可以到的最远距离)， count(答案)
 
-Sliding Window(209, 904, 76)
-
 Set(Hashset) vs List
 Sets are significantly faster when it comes to determining if an object is present in the set(as in x in s), but are slower than lists when it comes to iterating over their contents.
 
@@ -135,7 +133,7 @@ Sliding Window
 
 更新result通常是两个approach 2选1:
 1. inner while determines if the condition is reached, then update result in inner while loop
-2. inner while check if it past the condition, update start pointer to the uptimized position, then update result after inner while loop
+2. inner while check if it past the condition, update start pointer to the optimized position, then update result after inner while loop
 
 带*的 Sliding Window 题：
 For those question, an `atmostK` helper function is required. So, result(k) = atMostk(k) - atMostk(k-1)
@@ -146,3 +144,9 @@ For those question, an `atmostK` helper function is required. So, result(k) = at
 Aggragate subarrys
 O(N)解决问题，consider how each element will affect the final result during iteration. (Usually use diactionary or monotonic stack)
 2262, 828, 897, 2104 1498
+
+OOP Design (Polymorphism)
+abc.ABC (absract base class) is usually used to define a formal interface
+1628
+
+Global constant can be before class
