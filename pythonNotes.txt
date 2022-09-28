@@ -129,7 +129,7 @@ DP 01背包
 496, 503, 739, 84, 901, 907, 856
 
 Sliding Window
-209, 904, 76, *(992, 1248, 1358, 930), 1234, 1004, 992, 862
+209, 904, 76, *(992, 1248, 1358, 930), 1234, 1004, 862
 
 更新result通常是两个approach 2选1:
 1. inner while determines if the condition is reached, then update result in inner while loop
@@ -148,5 +148,8 @@ O(N)解决问题，consider how each element will affect the final result during
 OOP Design (Polymorphism)
 abc.ABC (absract base class) is usually used to define a formal interface
 1628
+
+Multithread
+1195
 
 Global constant can be before class

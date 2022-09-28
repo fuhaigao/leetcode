@@ -6,7 +6,7 @@ HashSet<Character> hs = new HashSet();
 !hs.add();
 
 List<Integer> arr = new ArrayList<int>();
-ArrayList<ArrayList<Integer>> arr = new ArrayList<>() / ArrayList();
+ArrayList<ArrayList<Integer>> arr = new ArrayList<>();
 Arrays.sort(arr, (a,b) -> a[0]-b[0])
 Collections.reverse(arr);
 
