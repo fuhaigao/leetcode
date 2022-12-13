@@ -1,4 +1,5 @@
 class Solution:
+    # Binary search on enveplopes width is similar to lc 300 (LIS)
     def maxEnvelopes(self, envelopes: List[List[int]]) -> int:
         if len(envelopes) == 0 or len(envelopes[0]) == 0:
             return 0

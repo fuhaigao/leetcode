@@ -1,21 +1,20 @@
-def quicksort(nums, low, high):
-    if low < high:
-        index = partition(nums, low, high)
-        quicksort(nums, low, index-1)
-        quicksort(nums, index+1, high)
-    return nums
-    
-
-def partition(nums, low, high):
-    index = low
-    pivot = high
-    for i in range(low, high):
+def quicksort(nums, start, end):
+    if start >= end:
+        return
+    index, pivot = start, end
+    for i in range(start, end):
         if nums[i] < nums[pivot]:
-            nums[i], nums[index] = nums[index], nums[i]
+            nums[index], nums[i] = nums[i], nums[index]
             index += 1
-    nums[pivot], nums[index] = nums[index], nums[pivot]
-    return index
-    
-nums = [5,6,8,3,4,9,2,1,7]
-nums = quicksort(nums, 0, len(nums)-1)
-print(nums)
+    nums[index], nums[pivot] = nums[pivot], nums[index]
+    # print(nums, index)
+    quicksort(nums, start, index-1)
+    quicksort(nums, index+1, end)
+
+def sortIntegers(nums):
+    quicksort(nums, 0, len(nums)-1)
+
+# arr = [5,3,4,2,6,1,9,8,7]
+arr = [5,6,8,3,4,9,2,1,7]
+sortIntegers(arr)
+print(arr)

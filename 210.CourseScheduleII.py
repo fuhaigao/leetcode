@@ -1,26 +1,22 @@
 class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
-        matrix = [[0]*numCourses for i in range(numCourses)]
-        indegree = [0]*numCourses
+        requisites = collections.defaultdict(list)
+        indegree = collections.defaultdict(int)
+        for course in range(numCourses):
+            indegree[course] = 0
         for entry in prerequisites:
-            ready = entry[0]
-            pre = entry[1]
-            matrix[pre][ready] = 1
-            indegree[ready] += 1
-        
-        queue = []
-        for i in range(len(indegree)):
-            if indegree[i] == 0:
-                queue.append(i)
+            indegree[entry[0]] += 1
+            requisites[entry[1]].append(entry[0])
+        queue = collections.deque()
+        for course in indegree:
+            if indegree[course] == 0:
+                queue.append(course)
         res = []
-        index = 0
         while queue:
-            course = queue.pop(0)
+            course = queue.popleft()
             res.append(course)
-            index += 1
-            for i in range(numCourses):
-                if matrix[course][i] == 1:
-                    indegree[i] -= 1
-                    if indegree[i] == 0:
-                        queue.append(i)
-        return res if index == numCourses else []
+            for course in requisites[course]:
+                indegree[course] -= 1
+                if indegree[course] == 0:
+                    queue.append(course)
+        return res if len(res) == numCourses else []

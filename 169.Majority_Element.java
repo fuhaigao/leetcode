@@ -1,19 +1,17 @@
-class Solution {
-    // Moore Voting Algorithm
-    public int majorityElement(int[] nums) {
-        int count = 1;
-        int majority = nums[0];
-        for (int i=1; i<nums.length; i++) {
-            if (nums[i] == majority) count++;
-            else {
-                count--;
-                if (count == 0) {
-                    majority = nums[i];
-                    count = 1;
-                }
-            }
+public class Solution {
+    public int majorityElement(int[] num) {
+
+        int major=num[0], count = 1;
+        for(int i=1; i<num.length;i++){
+            if(count==0){
+                count++;
+                major=num[i];
+            }else if(major==num[i]){
+                count++;
+            }else count--;
+            
         }
-        return majority;
+        return major;
     }
     
     // hashmap
